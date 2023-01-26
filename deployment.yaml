@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: php-backend-dev
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  replicas: 3 #tells deployment to run 3 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend-demo
+        image: lesinko/laravel-backend
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
